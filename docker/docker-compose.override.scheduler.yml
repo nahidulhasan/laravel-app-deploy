@@ -1,0 +1,20 @@
+version: '3.3'
+
+networks:
+  common-net:
+    external: true
+
+services:
+
+  scheduler:
+    image: ${COMPOSE_PROJECT_NAME}:${BUILD_MODE}
+    env_file:
+      - .envs/php-ini.env
+      - .envs/app.env
+      - .envs/scheduler.env
+    tty: true
+    command: ["run-scheduler.sh"]
+    networks:
+      - common-net
+    volumes:
+      - ../:/var/www/html

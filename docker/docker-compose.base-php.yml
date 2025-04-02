@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+
+  base-php:
+    image: ${APP_BASE_IMAGE_PULL_PATH}${APP_BASE_IMAGE_PHP_NAME}:${APP_BASE_IMAGE_PHP_TAG}
+    build:
+      context: ../
+      dockerfile: docker/base-php/Dockerfile
+    tty: true

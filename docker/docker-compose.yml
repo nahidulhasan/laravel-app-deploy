@@ -1,0 +1,42 @@
+version: '3.3'
+
+networks:
+  common-net:
+    external: true
+
+services:
+
+  backend:
+    image: ${COMPOSE_PROJECT_NAME}:${BUILD_MODE}
+    build:
+      context: ../
+      dockerfile: docker/app/Dockerfile
+      args:
+        - BASE_IMAGE_PULL_PATH=${APP_BASE_IMAGE_PULL_PATH}
+        - BASE_IMAGE_PHP_NAME=${APP_BASE_IMAGE_PHP_NAME}
+        - BASE_IMAGE_PHP_TAG=${APP_BASE_IMAGE_PHP_TAG}
+        - HTTP_PROXY=${APP_HTTP_PROXY}
+        - HTTPS_PROXY=${APP_HTTPS_PROXY}
+        - NO_PROXY=${APP_NO_PROXY}
+        - APPLICATION_TIMEZONE=${APPLICATION_TIMEZONE}
+        - BUILD_MODE=${BUILD_MODE}
+        - UID=${UID}
+        - GID=${GID}
+    restart: unless-stopped
+    tty: true
+    networks:
+      common-net:
+        aliases:
+          - learnathon-service-php
+
+#  php-worker:
+#    build:
+#      context: ./app
+#    volumes_from:
+#      - php
+#    command: php artisan schedule:run
+#
+#    networks:
+#      common-net:
+#        aliases:
+#          - rcms-service-php

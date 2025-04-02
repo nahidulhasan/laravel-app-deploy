@@ -1,0 +1,7 @@
+# Ignore .env files.
+.env
+docker-compose-dev.yml
+docker-compose-prod.yml
+docker-compose.override.yml
+docker-compose.override.dev.yml
+docker-compose.override.prod.yml

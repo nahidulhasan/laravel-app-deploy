@@ -9,7 +9,7 @@ on:
       - develop
 
 jobs:
-  push to registry:
+  push-to-registry:
     name: push to DockerHub
     runs-on: ubuntu-latest
     steps:
